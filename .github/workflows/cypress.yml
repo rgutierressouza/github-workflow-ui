@@ -12,23 +12,19 @@ jobs:
           node-version: '14'
           run: npx cypress run
 
-      - name: Install dependencies
-        uses: actions/checkout@v3
-        run: npm install
+      - name: Setup Node
+        uses: actions/setup-node@v4
 
-      - name: Build
-        uses: actions/checkout@v3
-        run: npx cypress run
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
 
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
-          screenshotOnRunFailure: true
           name: cypress-screenshots
           path: cypress/screenshots
 
-      - name: Upload video
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
-          videoCompression: true
-          videosFolder: cypress/video
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
