@@ -17,3 +17,10 @@ jobs:
 
       - name: Build
         run: npx cypress run
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          screenshotOnRunFailure: true
+          name: cypress-screenshots
+          path: cypress/screenshots
